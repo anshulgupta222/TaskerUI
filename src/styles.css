@@ -1,1 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+
+.container-md{
+    width: 50%;
+    height:auto;
+}
+.form-control.ng-touched.ng-invalid{
+    border:2px solid red;
+}
