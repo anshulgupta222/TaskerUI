@@ -16,21 +16,7 @@ export class RegistrationFormComponent{
     email : new FormControl('',[Validators.required,Validators.email]),
     password : new FormControl('',[Validators.required,Validators.pattern(/(?=.*[A-Z])/)])
   });
-
-  get firstName()
-  {
-    return this.form.get('firstName');
-  }
-
-  get email()
-  {
-    return this.form.get('email');
-  }
-
-  get password()
-  {
-    return this.form.get('password');
-  }
+  
   register(){
     if(!this.form.valid){
       this.form.setErrors({})
