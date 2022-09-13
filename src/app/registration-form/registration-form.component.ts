@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { SpaceValidators} from './space.validators';
 
 @Component({
@@ -31,8 +32,8 @@ export class RegistrationFormComponent{
     return this.form.get('password');
   }
   register(){
-    this.form.setErrors({
-      inValidRegistration:true,
-    })
+    if(!this.form.valid){
+      this.form.setErrors({})
+    }
   }
 }
