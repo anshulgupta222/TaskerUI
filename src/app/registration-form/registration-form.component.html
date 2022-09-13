@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+  <div class="col-md-5 border">
+    <div class="text-center my-2" style="font-weight: bold">
+      Register yourself
+    </div>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <div *ngIf="form?.errors" class="alert alert-danger">
+        Please resolve the errors first
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <input
+              formControlName="firstName"
+              id="firstName"
+              type="text"
+              class="form-control"
+              placeholder="First Name"
+            />
+            <div
+              *ngIf="form.get('firstName')?.['touched'] && form.get('firstName')?.['invalid']"
+              class="alert alert-danger"
+            >
+              <div *ngIf="form.get('firstName')?.errors?.['required']">
+                First Name is required.
+              </div>
+              <div *ngIf="form.get('firstName')?.errors?.['cannotContainSpace']">
+                First Name can not contain space.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input
+              formControlName="lastName"
+              id="lastName"
+              type="text"
+              class="form-control"
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="Email" class="form-label">E-mail</label>
+          <div class="col-md-12">
+            <input
+              formControlName="email"
+              id="email"
+              type="email"
+              class="form-control"
+            />
+            <div
+              *ngIf="form.get('email')?.['touched'] && form.get('email')?.['invalid'] "
+              class="alert alert-danger"
+            >
+              <div *ngIf="form.get('email')?.errors?.['required']">E-mail is required</div>
+              <div *ngIf="form.get('email')?.errors?.['email']">
+                Please Enter a valid Email
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <label for="password" class="form-label">Password</label>
+          <div class="col-md-12">
+            <input
+              formControlName="password"
+              id="password"
+              type="password"
+              class="form-control"
+            />
+            <div
+              *ngIf="form.get('password')?.['touched'] && form.get('password')?.['invalid']"
+              class="alert alert-danger"
+            >
+              <div *ngIf="form.get('password')?.errors?.['required']">
+                password is required
+              </div>
+              <div *ngIf="form.get('password')?.errors?.['pattern']">
+                Password should contain atleast one capital letter
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="text-center my-2">
+          <button class="btn btn-primary">Register</button>
+        </div>
+        <span class="my-2"></span>
+      </div>
+    </form>
+  </div>
+</div>
