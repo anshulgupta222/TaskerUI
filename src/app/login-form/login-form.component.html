@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-md-3 border">
+    <div class="text-center fw-bold my-2">Login</div>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <div *ngIf="form?.errors" class="alert alert-danger">
+        Please resolve the errors first
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label for="email" class="form-label">Email</label>
+          <div class="col-md-12">
+            <input
+              formControlName="email"
+              id="email"
+              type="email"
+              class="form-control"
+            />
+            <div
+              *ngIf="form.get('email')?.['touched'] && form.get('email')?.['invalid']"
+              class="alert alert-danger"
+            >
+              <div *ngIf="form.get('email')?.errors?.['required']">
+                email is required.
+              </div>
+              <div *ngIf="form.get('email')?.errors?.['email']">
+                Please Enter a valid Email
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label for="password" class="form-label">Password</label>
+          <div class="col-md-12">
+            <input
+              formControlName="password"
+              id="password"
+              type="password"
+              class="form-control"
+            />
+            <div
+              *ngIf="form.get('password')?.['touched'] && form.get('password')?.['invalid']"
+              class="alert alert-danger"
+            >
+              <div *ngIf="form.get('password')?.errors?.['required']">
+                Password is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary my-2">Login</button>
+      </div>
+      <div class="row">
+        <div class="col-md-5"><hr /></div>
+        <div class="col text-center">OR</div>
+        <div class="col-md-5"><hr /></div>
+      </div>
+      <div class="text-center my-1">
+        <button class="btn btn-outline-dark my-1">
+          <img src=".\assets\images\google-logo.png" /> Login with Google
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
