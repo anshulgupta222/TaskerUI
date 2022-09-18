@@ -1,7 +1,10 @@
 <div class="row justify-content-center">
   <div class="col-md-3 border">
-    <div class="text-center my-2" style="font-weight: bold">Login</div>
-    <form [formGroup]="form">
+    <div class="text-center fw-bold my-2">Login</div>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <div *ngIf="form?.errors" class="alert alert-danger">
+        Please resolve the errors first
+      </div>
       <div class="form-group">
         <div class="row">
           <label for="email" class="form-label">Email</label>
@@ -9,7 +12,7 @@
             <input
               formControlName="email"
               id="email"
-              type="text"
+              type="email"
               class="form-control"
             />
             <div
@@ -33,7 +36,7 @@
             <input
               formControlName="password"
               id="password"
-              type="text"
+              type="password"
               class="form-control"
             />
             <div

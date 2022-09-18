@@ -13,4 +13,9 @@ export class LoginFormComponent{
     password: new FormControl('',Validators.required)
   });
 
+  login(){
+    if(!this.form.valid){
+    this.form.setErrors({});
+    }
+  }
 }
