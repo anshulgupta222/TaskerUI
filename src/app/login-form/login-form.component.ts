@@ -14,8 +14,9 @@ export class LoginFormComponent{
   });
 
   login(){
+    
     if(!this.form.valid){
     this.form.setErrors({});
-    }
+   }
   }
 }
