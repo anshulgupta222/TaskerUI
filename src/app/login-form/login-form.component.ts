@@ -1,22 +1,28 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../Auth.Service';
 
 @Component({
   selector: 'login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  styleUrls: ['./login-form.component.css'],
 })
-export class LoginFormComponent{
+export class LoginFormComponent {
+  constructor(private authService: AuthService) {}
 
   form = new FormGroup({
-    email:new FormControl('',[Validators.required,Validators.email]),
-    password: new FormControl('',Validators.required)
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
   });
 
-  login(){
+  login() {
+    if(this.form.valid){
+      console.log("Form is valid");
+      this.authService.login(this.form.value);
+    }
+    else{
+      this.form.setErrors({});
+    }
     
-    if(!this.form.valid){
-    this.form.setErrors({});
-   }
   }
 }
