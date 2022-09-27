@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { LocalStorageService } from './localStorage';
 import { IResponse } from './response';
@@ -15,20 +18,35 @@ export class AuthService {
   constructor(
     private readonly router: Router,
     private readonly httpClient: HttpClient,
-    private readonly localStorage: LocalStorageService
+    private readonly localStorage: LocalStorageService,
+    private readonly toaster : ToastrService
   ) {}
 
   login(credential: { email: string; password: string }): void {
     console.log('calling an api');
     console.log(credential);
     this.httpClient
-      .post<IResponse<IUser>>(
+      .post<IResponse<IUser> | null>(
         'https://localhost:5001/Account/Login',
         credential
       )
+      .pipe(catchError((error : HttpErrorResponse) => {
+        if (error.status == 401) {
+            this.toaster.error("Login Failed");
+        }
+        else{
+          console.log("An Error is occured")
+        }
+        return of(null);
+      })
+      )
       .subscribe((response) => {
-        console.log(response.data);
-        this.localStorage.setItem('userData', response.data);
+        console.log(response);
+        if (response)
+        {
+          console.log(response.data);
+          this.localStorage.setItem('userData', response.data);
+        } 
       });
   }
 
@@ -39,7 +57,7 @@ export class AuthService {
   }
 
   registerUser(userData: IUser): void {
-    console.log('RegisterUser Calling ');
+    console.log('RegisterUser Calling');
     console.log(userData.firstName);
     var response = this.httpClient
       .post<IUser>('https://localhost:5001/Account/Register', userData)
