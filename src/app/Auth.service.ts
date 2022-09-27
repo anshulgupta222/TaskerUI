@@ -19,7 +19,7 @@ export class AuthService {
     private readonly router: Router,
     private readonly httpClient: HttpClient,
     private readonly localStorage: LocalStorageService,
-    private readonly toaster : ToastrService
+    private readonly toaster: ToastrService
   ) {}
 
   login(credential: { email: string; password: string }): void {
@@ -30,23 +30,22 @@ export class AuthService {
         'https://localhost:5001/Account/Login',
         credential
       )
-      .pipe(catchError((error : HttpErrorResponse) => {
-        if (error.status == 401) {
-            this.toaster.error("Login Failed");
-        }
-        else{
-          console.log("An Error is occured")
-        }
-        return of(null);
-      })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status == 401) {
+            this.toaster.error('Login Failed');
+          } else {
+            console.log('An Error is occured');
+          }
+          return of(null);
+        })
       )
       .subscribe((response) => {
         console.log(response);
-        if (response)
-        {
+        if (response) {
           console.log(response.data);
           this.localStorage.setItem('userData', response.data);
-        } 
+        }
       });
   }
 
@@ -58,11 +57,10 @@ export class AuthService {
 
   registerUser(userData: IUser): void {
     console.log('RegisterUser Calling');
-    console.log(userData.firstName);
     var response = this.httpClient
       .post<IUser>('https://localhost:5001/Account/Register', userData)
       .subscribe((response) => {
         console.log(response);
-    });
+      });
   }
 }
