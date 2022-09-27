@@ -1,4 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .form-control.ng-touched.ng-invalid{
     border:2px solid red;
