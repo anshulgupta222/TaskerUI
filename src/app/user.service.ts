@@ -1,12 +1,19 @@
-import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { IUser } from "./user.interface";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { LocalStorageService } from './localStorage';
+import { IUser } from './user.interface';
 
 @Injectable({
-    providedIn: 'root',
-  })
-export class UserService{
+  providedIn: 'root',
+})
+export class UserService {
+  user$: Observable<IUser | undefined>  = new BehaviorSubject<IUser | undefined>(undefined);
+  constructor(private localStorage: LocalStorageService) {
+    this.refreshUser();
+  }
 
-   user$ : Observable<IUser> = new Subject<IUser>();
-
+  refreshUser():void {
+    let user = this.localStorage.getItem<IUser>('userData');
+    (this.user$ as BehaviorSubject<IUser | undefined>).next(user);
+  }
 }
