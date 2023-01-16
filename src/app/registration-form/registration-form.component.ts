@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../Auth.Service';
+import { AuthService } from '../services/Auth.service';
 
 import { SpaceValidators } from './space.validators';
 

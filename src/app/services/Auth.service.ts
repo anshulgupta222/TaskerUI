@@ -6,8 +6,8 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { LocalStorageService } from './localStorage';
-import { IResponse } from './response';
-import { IUser } from './user.interface';
+import { IResponse } from '../interfaces/response';
+import { IUser } from '../interfaces/user.interface';
 import { UserService } from './user.service';
 
 @Injectable({

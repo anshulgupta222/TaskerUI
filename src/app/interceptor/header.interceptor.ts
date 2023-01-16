@@ -7,12 +7,13 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from './localStorage';
-import { IUser } from './user.interface';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { LocalStorageService } from '../services/localStorage';
+import { IUser } from '../interfaces/user.interface';
 
 @Injectable()
+
 export class HeaderInterceptor implements HttpInterceptor {
   constructor(
     private localstorage: LocalStorageService,
