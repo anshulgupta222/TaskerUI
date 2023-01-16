@@ -6,8 +6,9 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { LocalStorageService } from './localStorage';
-import { IResponse } from './response';
-import { IUser } from './user.interface';
+import { IResponse } from '../interfaces/response';
+import { IUser } from '../interfaces/user.interface';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +20,12 @@ export class AuthService {
     private readonly router: Router,
     private readonly httpClient: HttpClient,
     private readonly localStorage: LocalStorageService,
-    private readonly toaster: ToastrService
+    private readonly toaster: ToastrService,
+    private readonly userService : UserService
   ) {}
 
   login(credential: { email: string; password: string }): void {
-    console.log('calling an api');
-    console.log(credential);
+  
     this.httpClient
       .post<IResponse<IUser> | null>(
         'https://localhost:5001/Account/Login',
@@ -41,10 +42,9 @@ export class AuthService {
         })
       )
       .subscribe((response) => {
-        console.log(response);
         if (response) {
-          console.log(response.data);
           this.localStorage.setItem('userData', response.data);
+          this.userService.refreshUser();
         }
       });
   }
@@ -52,6 +52,7 @@ export class AuthService {
   logout(): boolean {
     this.localStorage.removeItem('userData');
     this.router.navigate(['/login']);
+    this.userService.refreshUser();
     return this.isLogIn;
   }
 
