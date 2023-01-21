@@ -17,6 +17,7 @@ export class LoginFormComponent {
 
   login() {
     if(this.form.valid){
+      console.log(this.form);
       console.log("Form is valid");
       this.authService.login(this.form.value);
     }

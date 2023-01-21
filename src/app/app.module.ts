@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { HeaderInterceptor } from './interceptor/header.interceptor';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
+import { TaskDashboardComponent } from './task-dashboard/task-dashboard.component';
 
 
 
@@ -18,6 +21,9 @@ import { HeaderInterceptor } from './interceptor/header.interceptor';
     AppComponent,
     RegistrationFormComponent,
     LoginFormComponent,
+    TaskFormComponent,
+    TaskDetailsComponent,
+    TaskDashboardComponent,
   ],
   imports: [
     BrowserModule,

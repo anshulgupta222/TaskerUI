@@ -1,8 +1,7 @@
 <div class="row justify-content-center">
-  <div class="col-md-5 border">
-    <div class="text-center fw-bold my-2">
-      Register yourself
-    </div>
+  <div class="col-md-4 border">
+    <div class="text-start fw-bold my-2">Sign Up and Start Working</div>
+    <div class="col-md-12"><hr /></div>
     <form [formGroup]="form" (ngSubmit)="register()">
       <div *ngIf="form?.errors" class="alert alert-danger">
         Please resolve the errors first
@@ -24,7 +23,9 @@
               <div *ngIf="form.get('firstName')?.errors?.['required']">
                 First Name is required.
               </div>
-              <div *ngIf="form.get('firstName')?.errors?.['cannotContainSpace']">
+              <div
+                *ngIf="form.get('firstName')?.errors?.['cannotContainSpace']"
+              >
                 First Name can not contain space.
               </div>
             </div>
@@ -40,38 +41,37 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group">
-          <label for="Email" class="form-label">E-mail</label>
-          <div class="col-md-12">
-            <input
-              formControlName="email"
-              id="email"
-              type="email"
-              class="form-control"
-            />
-            <div
-              *ngIf="form.get('email')?.['touched'] && form.get('email')?.['invalid'] "
-              class="alert alert-danger"
-            >
-              <div *ngIf="form.get('email')?.errors?.['required']">E-mail is required</div>
-              <div *ngIf="form.get('email')?.errors?.['email']">
-                Please Enter a valid Email
-              </div>
+      <div class="row my-2">
+        <div class="col-md-12">
+          <input
+            formControlName="email"
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="Email"
+          />
+          <div
+            *ngIf="form.get('email')?.['touched'] && form.get('email')?.['invalid'] "
+            class="alert alert-danger"
+          >
+            <div *ngIf="form.get('email')?.errors?.['required']">
+              E-mail is required
+            </div>
+            <div *ngIf="form.get('email')?.errors?.['email']">
+              Please Enter a valid Email
             </div>
           </div>
         </div>
       </div>
-
       <div class="form-group">
-        <div class="row">
-          <label for="password" class="form-label">Password</label>
+        <div class="row my-2">
           <div class="col-md-12">
             <input
               formControlName="password"
               id="password"
               type="password"
               class="form-control"
+              placeholder="Password"
             />
             <div
               *ngIf="form.get('password')?.['touched'] && form.get('password')?.['invalid']"
@@ -87,11 +87,10 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="text-center my-2">
-          <button class="btn btn-primary">Register</button>
-        </div>
-        <span class="my-2"></span>
+      <button class="btn btn-primary form-control fw-bold">Sign up</button>
+      <div class="col-md-12"><hr /></div>
+      <div class="text-center my-1">
+        Already have an account? <span><a routerLink="/login">Login</a></span>
       </div>
     </form>
   </div>
