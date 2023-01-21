@@ -1,0 +1,55 @@
+<div class="row justify-content-center" style="font-size: 11px">
+  <div class="col-md-5 border">
+    <div class="container">
+      <div class="table-wrapper my-2">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-8 fw-bold my-2" style="font-size: 14px">
+              Task Details
+            </div>
+            <div class="col-sm-4">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="showAddTask()"
+                style="font-size: 11px; float: right"
+              >
+                Add New Task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr class="table-primary">
+          <th>Task</th>
+          <th>Current Worker</th>
+          <th>Next Worker</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let task of tasks"
+          (click)="rowSelected(task)"
+          [ngClass]="{ highlight: task === selectedTask }"
+        >
+          <td>{{ task.taskName }}</td>
+          <td>{{ task.currentWorker }}</td>
+          <td>{{ task.nextWorker }}</td>
+          <td><button
+            class="btn-close d-flex justify-content-center"
+            (click)="removeRow(task);onEvent($event)"
+          ></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<task-details
+  [selectedTask]="selectedTask"
+  [displayStyle]="displayStyle"
+  (closeEvent)="onCloseClickEvent()"
+></task-details>

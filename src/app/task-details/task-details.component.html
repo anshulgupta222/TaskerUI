@@ -1,0 +1,26 @@
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayStyle }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Task Details</h4>
+        <button
+          class="btn-close d-flex justify-content-end"
+          (click)="closePopup()"
+        ></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedTask" style="font-size: 11px">
+        <p>Task Name : {{ selectedTask.taskName }}</p>
+        <!-- <p>Created On :{{}}</p>
+        <p>All Workers :{{}}</p> -->
+        <p>Current Worker :{{ selectedTask.currentWorker }}</p>
+        <p>Next Worker :{{ selectedTask.nextWorker }}</p>
+        <!-- <p>History :{{}}</p> -->
+      </div>
+    </div>
+  </div>
+</div>

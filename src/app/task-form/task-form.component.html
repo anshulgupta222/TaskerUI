@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 border">
+    <div class="text-start fw-bold my-2">Create a Task</div>
+    <div class="col-md-12"><hr /></div>
+    <div class="form-group my-2">
+      <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+        <div
+          *ngIf="taskForm?.errors"
+          class="alert alert-danger"
+          style="font-size: 10px"
+        >
+          Please resolve the errors First to Proceed
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-12">
+              <input
+                formControlName="taskName"
+                id="taskName"
+                type="text"
+                class="form-control"
+                placeholder="Task_Name"
+              />
+              <div
+                *ngIf="taskForm.get('taskName')?.['touched'] && taskForm.get('taskName')?.['invalid']"
+                class="alert alert-danger"
+              >
+                <div
+                  *ngIf="taskForm.get('taskName')?.errors?.['required']"
+                  style="font-size: 10px"
+                >
+                  Task Name is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-6">
+              <select
+                class="form-select"
+                aria-label="workers"
+                formControlName="workers"
+                multiple
+              >
+                <option selected>Select Workers</option>
+                <option value="Anshul">Anshul</option>
+                <option value="Digvijay">Digvijay</option>
+                <option value="Harsh">Harsh</option>
+                <option value="Tejas">Tejas</option>
+              </select>
+              <div
+                *ngIf="taskForm.get('workers')?.['touched'] && taskForm.get('workers')?.['invalid']"
+                class="alert alert-danger"
+              >
+                <div
+                  *ngIf="taskForm.get('workers')?.errors?.['required']"
+                  style="font-size: 10px"
+                >
+                  Please Select the Workers
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <select
+                class="form-select"
+                aria-label="currentWorker"
+                formControlName="currentWorker"
+              >
+                <option selected>Select Current Workers</option>
+                <option>Anshul</option>
+                <option>Digvijay</option>
+                <option>Harsh</option>
+                <option>Tejas</option>
+              </select>
+              <div
+                *ngIf="taskForm.get('currentWorker')?.['touched'] && taskForm.get('currentWorker')?.['invalid']"
+                class="alert alert-danger"
+              >
+                <div
+                  *ngIf="taskForm.get('currentWorker')?.errors?.['required']"
+                  style="font-size: 10px"
+                >
+                  Please Select Current Worker
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-md-12">
+              <select
+                class="form-select"
+                aria-label="orderingScheme"
+                formControlName="orderingScheme"
+              >
+                <option selected>Select Order Scheme</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+              </select>
+              <div
+                *ngIf="taskForm.get('orderingScheme')?.['touched'] && taskForm.get('orderingScheme')?.['invalid']"
+                class="alert alert-danger"
+              >
+                <div
+                  *ngIf="taskForm.get('orderingScheme')?.errors?.['required']"
+                  style="font-size: 10px"
+                >
+                  Please Select Order Scheme
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center my-2">
+            <button class="btn btn-primary">Add Task</button>
+          </div>
+          <span class="my-2"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
