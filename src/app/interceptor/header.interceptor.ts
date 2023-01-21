@@ -24,10 +24,10 @@ export class HeaderInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    let userToken = this.localstorage.getItem<IUser>('userData')?.token;
+    let userToken = this.localstorage.getItem<IUser>('userData')?.token; 
     if (userToken) {
       request = request.clone({
-        headers: request.headers.set('Authorization', `${userToken}`),
+        headers: request.headers.set('Authorization', 'Bearer '+`${userToken}`),
       });
     }
     return next.handle(request).pipe(

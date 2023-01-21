@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav col-md-1">
         <a class="nav-item fw-bold nav-link" href="#"><span class="bi bi-house-door-fill"></span></a>
-        <a class="nav-item fw-bold nav-link" routerLink="/taskDashboard"><i class="bi bi-table"></i></a>
+        <a class="nav-item fw-bold nav-link" *ngIf="user" routerLink="/taskDashboard"><i class="bi bi-table"></i></a>
       </div>
       <div class="navbar-nav justify-content-end col-md-11">
         <a class="nav-item fw-bold nav-link" *ngIf="user" (click) ="logout()"><span class="bi bi-door-closed"></span>Log-Out</a>
