@@ -14,11 +14,9 @@
         ></button>
       </div>
       <div class="modal-body" *ngIf="selectedTask" style="font-size: 11px">
-        <p>Task Name : {{ selectedTask.taskName }}</p>
-        <!-- <p>Created On :{{}}</p>
-        <p>All Workers :{{}}</p> -->
-        <p>Current Worker :{{ selectedTask.currentWorker }}</p>
-        <p>Next Worker :{{ selectedTask.nextWorker }}</p>
+        <p>Task Name : {{ selectedTask.name }}</p>
+        <p>Created On : {{selectedTask.createdOn}}</p>
+        <p>Current Worker : {{ selectedTask.currentWorker.firstName }} {{ selectedTask.currentWorker.lastName }} </p>
         <!-- <p>History :{{}}</p> -->
       </div>
     </div>
