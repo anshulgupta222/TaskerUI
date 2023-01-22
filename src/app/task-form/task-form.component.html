@@ -9,24 +9,24 @@
           class="alert alert-danger"
           style="font-size: 10px"
         >
-          Please resolve the errors First to Proceed
+          Please resolve the errors first to proceed
         </div>
         <div class="form-group">
           <div class="row">
             <div class="col-md-12">
               <input
-                formControlName="taskName"
-                id="taskName"
+                formControlName="name"
+                id="name"
                 type="text"
                 class="form-control"
-                placeholder="Task_Name"
+                placeholder="Task Name"
               />
               <div
-                *ngIf="taskForm.get('taskName')?.['touched'] && taskForm.get('taskName')?.['invalid']"
+                *ngIf="taskForm.get('name')?.['touched'] && taskForm.get('name')?.['invalid']"
                 class="alert alert-danger"
               >
                 <div
-                  *ngIf="taskForm.get('taskName')?.errors?.['required']"
+                  *ngIf="taskForm.get('name')?.errors?.['required']"
                   style="font-size: 10px"
                 >
                   Task Name is required.
@@ -38,22 +38,21 @@
             <div class="col-md-6">
               <select
                 class="form-select"
-                aria-label="workers"
-                formControlName="workers"
+                aria-label="workerIds"
+                formControlName="workerIds"
                 multiple
+
               >
-                <option selected>Select Workers</option>
-                <option value="Anshul">Anshul</option>
-                <option value="Digvijay">Digvijay</option>
-                <option value="Harsh">Harsh</option>
-                <option value="Tejas">Tejas</option>
+                <option disabled>Select Possible Workers</option> -->
+                <option *ngFor="let user of usersList" [value]="user.id">
+                  {{user.firstName}}</option>
               </select>
               <div
-                *ngIf="taskForm.get('workers')?.['touched'] && taskForm.get('workers')?.['invalid']"
+                *ngIf="taskForm.get('workerIds')?.['touched'] && taskForm.get('workerIds')?.['invalid']"
                 class="alert alert-danger"
               >
                 <div
-                  *ngIf="taskForm.get('workers')?.errors?.['required']"
+                  *ngIf="taskForm.get('workerIds')?.errors?.['required']"
                   style="font-size: 10px"
                 >
                   Please Select the Workers
@@ -64,21 +63,19 @@
             <div class="col-md-6">
               <select
                 class="form-select"
-                aria-label="currentWorker"
-                formControlName="currentWorker"
+                aria-label="currentWorkerId"
+                formControlName="currentWorkerId"
               >
-                <option selected>Select Current Workers</option>
-                <option>Anshul</option>
-                <option>Digvijay</option>
-                <option>Harsh</option>
-                <option>Tejas</option>
+                <option disabled>Select Current Workers</option>
+                <option *ngFor="let user of usersList" [value]="user.id">
+                  {{user.firstName}}</option>
               </select>
               <div
-                *ngIf="taskForm.get('currentWorker')?.['touched'] && taskForm.get('currentWorker')?.['invalid']"
+                *ngIf="taskForm.get('currentWorkerId')?.['touched'] && taskForm.get('currentWorkerId')?.['invalid']"
                 class="alert alert-danger"
               >
                 <div
-                  *ngIf="taskForm.get('currentWorker')?.errors?.['required']"
+                  *ngIf="taskForm.get('currentWorkerId')?.errors?.['required']"
                   style="font-size: 10px"
                 >
                   Please Select Current Worker
@@ -94,8 +91,8 @@
                 formControlName="orderingScheme"
               >
                 <option selected>Select Order Scheme</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
               </select>
               <div
                 *ngIf="taskForm.get('orderingScheme')?.['touched'] && taskForm.get('orderingScheme')?.['invalid']"
