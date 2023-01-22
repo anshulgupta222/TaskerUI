@@ -21,11 +21,19 @@ export class AuthService {
     private readonly httpClient: HttpClient,
     private readonly localStorage: LocalStorageService,
     private readonly toaster: ToastrService,
-    private readonly userService : UserService
+    private readonly userService: UserService
   ) {}
 
+  registerUser(userData: IUser): void {
+    console.log('RegisterUser Calling');
+    var response = this.httpClient
+      .post<IUser>('https://localhost:5001/Account/Register', userData)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
   login(credential: { email: string; password: string }): void {
-  
     this.httpClient
       .post<IResponse<IUser> | null>(
         'https://localhost:5001/Account/Login',
@@ -33,17 +41,21 @@ export class AuthService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          if (error.status == 401) {
+          if (error.status == 401 || error.status == 400) {
             this.toaster.error('Login Failed');
           } else {
-            console.log('An Error is occured');
+            console.log('Inside Login API Call: Something Went Wrong !!');
           }
           return of(null);
         })
       )
       .subscribe((response) => {
         if (response) {
+          this.toaster.success('Access Granted');
           this.localStorage.setItem('userData', response.data);
+          setTimeout(() => {
+            this.router.navigate(['/taskDashboard']);
+          }, 2500);
           this.userService.refreshUser();
         }
       });
@@ -54,14 +66,5 @@ export class AuthService {
     this.router.navigate(['/login']);
     this.userService.refreshUser();
     return this.isLogIn;
-  }
-
-  registerUser(userData: IUser): void {
-    console.log('RegisterUser Calling');
-    var response = this.httpClient
-      .post<IUser>('https://localhost:5001/Account/Register', userData)
-      .subscribe((response) => {
-        console.log(response);
-      });
   }
 }

@@ -32,7 +32,7 @@ import { TaskDashboardComponent } from './task-dashboard/task-dashboard.componen
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({positionClass: 'toast-top-center'})
   ],
   providers: [{provide: HTTP_INTERCEPTORS,
     useClass: HeaderInterceptor,
