@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -13,8 +13,6 @@ import { HeaderInterceptor } from './interceptor/header.interceptor';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskDashboardComponent } from './task-dashboard/task-dashboard.component';
-
-
 
 @NgModule({
   declarations: [
@@ -32,11 +30,11 @@ import { TaskDashboardComponent } from './task-dashboard/task-dashboard.componen
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({positionClass: 'toast-top-center'})
+    ToastrModule.forRoot({ positionClass: 'toast-top-center', timeOut: 1500 }),
   ],
-  providers: [{provide: HTTP_INTERCEPTORS,
-    useClass: HeaderInterceptor,
-    multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

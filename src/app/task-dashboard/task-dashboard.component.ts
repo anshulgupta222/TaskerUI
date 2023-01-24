@@ -45,7 +45,8 @@ export class TaskDashboardComponent implements OnInit {
 
   deleteTask(task: any): void {
     console.log(" INSIDE DELETE TASK API : ", task.id);
-    this.taskService.deleteTask(task.id);
+    task = {name : task.name , id : task.id}
+    this.taskService.deleteTask(task);
 
   }
   onEvent(event: Event) {

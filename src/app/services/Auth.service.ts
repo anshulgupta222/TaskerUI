@@ -28,8 +28,22 @@ export class AuthService {
     console.log('RegisterUser Calling');
     var response = this.httpClient
       .post<IUser>('https://localhost:5001/Account/Register', userData)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status == 401 || error.status == 400) {
+            this.toaster.error('Please Try Again');
+            console.log(error.message);
+          } else {
+            console.log('Inside Registration API Call');
+          }
+          return of(null);
+        })
+      )
       .subscribe((response) => {
+        if (response) {
+          this.toaster.success('New User is created');
         console.log(response);
+        }
       });
   }
 
@@ -43,6 +57,7 @@ export class AuthService {
         catchError((error: HttpErrorResponse) => {
           if (error.status == 401 || error.status == 400) {
             this.toaster.error('Login Failed');
+            console.log(error.message);
           } else {
             console.log('Inside Login API Call: Something Went Wrong !!');
           }

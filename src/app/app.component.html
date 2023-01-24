@@ -15,14 +15,61 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav col-md-1">
-        <a class="nav-item fw-bold nav-link" href="#"><span class="bi bi-house-door-fill"></span></a>
+        <a
+          class="nav-item fw-bold nav-link"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Home"
+          href="#"
+          ><span class="bi bi-house-door-fill"></span
+        ></a>
       </div>
       <div class="navbar-nav justify-content-end col-md-11">
-        <a class="nav-item fw-bold nav-link" *ngIf="user" (click) ="logout()"><span class="bi bi-power"></span></a><!--LOG-OUT-->
-        <a class="nav-item fw-bold nav-link" *ngIf="user" routerLink="/taskDashboard"><i class="bi bi-table"></i></a>
-        <a class="nav-item fw-bold nav-link" *ngIf="!user" routerLink="/login"><span class="bi bi-box-arrow-right"></span> Login</a>
-        <a class="nav-item fw-bold nav-link" *ngIf="!user" routerLink="/register"><span class="bi bi-person-badge-fill"></span> Sign-Up</a>
-        <a class="nav-item fw-bold nav-link" *ngIf="user" routerLink="/register"><span class="bi bi-person-fill"></span>{{user.firstName}}</a>
+        <a
+          class="nav-item fw-bold nav-link"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Sign-Out"
+          *ngIf="user"
+          (click)="logout()"
+          ><span class="bi bi-power"></span
+        ></a>
+        <a
+          class="nav-item fw-bold nav-link"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="dashboard"
+          *ngIf="user"
+          routerLink="/taskDashboard"
+          ><i class="bi bi-table"></i
+        ></a>
+        <a
+          class="nav-item fw-bold nav-link"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Login"
+          *ngIf="!user"
+          routerLink="/login"
+          ><span class="bi bi-box-arrow-right"></span> Login</a
+        >
+        <a
+          class="nav-item fw-bold nav-link"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Sign-Up"
+          *ngIf="!user"
+          routerLink="/register"
+          ><span class="bi bi-person-badge-fill"></span> Sign-Up</a
+        >
+        <a
+          class="nav-item fw-bold nav-link"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="{{ user.firstName }}"
+          *ngIf="user"
+          routerLink="/register"
+          ><span class="bi bi-person-fill"></span>{{ user.firstName }}</a
+        >
       </div>
     </div>
   </nav>
