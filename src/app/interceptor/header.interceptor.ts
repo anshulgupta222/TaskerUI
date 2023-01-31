@@ -11,13 +11,15 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { LocalStorageService } from '../services/localStorage';
 import { IUser } from '../interfaces/user.interface';
+import { AuthService } from '../services/Auth.service';
 
 @Injectable()
 
 export class HeaderInterceptor implements HttpInterceptor {
   constructor(
     private localstorage: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private readonly authService: AuthService
   ) {}
 
   intercept(
@@ -38,7 +40,8 @@ export class HeaderInterceptor implements HttpInterceptor {
             if (error.status !== 401) {
               return;
             }
-            this.router.navigate(['register']);
+            this.authService.logout();
+            // this.router.navigate(['/login']);
           }
         }
       )

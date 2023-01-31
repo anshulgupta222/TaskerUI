@@ -3,7 +3,7 @@
     <div class="text-start fw-bold my-2">Create a New Task</div>
     <div class="col-md-12"><hr /></div>
     <div class="form-group my-2">
-      <form [formGroup]="taskForm" (ngSubmit)="addTask()" >
+      <form [formGroup]="taskForm" (ngSubmit)="addTask()">
         <div
           *ngIf="taskForm?.errors"
           class="alert alert-danger"
@@ -20,7 +20,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Task Name"
-                style="font-size :13px"
+                style="font-size: 13px"
               />
               <div
                 *ngIf="taskForm.get('name')?.['touched'] && taskForm.get('name')?.['invalid']"
@@ -35,28 +35,19 @@
               </div>
             </div>
           </div>
-          <div class="row my-2">
-            <div class="col-md-6">
-              <select
-                class="form-select"
-                aria-label="workerIds"
+          <div class="row my-2" style="font-size: 13px">
+            <div class="col-md-6" *ngIf="possibleWorkerList">
+              <ng-multiselect-dropdown
                 formControlName="workerIds"
-                multiple
-                (ngModelChange)="getCurrentWorkerList($event)"
-                style="font-size :13px"
+                [placeholder]="'Select Possible Workers'"
+                [settings]="dropdownSettings"
+                [data]="possibleWorkerList"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)"
               >
-                <option disabled>Select Possible Workers</option>
-                -->
-                <option
-                  *ngFor="let possibleWorker of possibleWorkerList"
-                  [value]="{
-                    id: possibleWorker.id,
-                    firstName: possibleWorker.firstName
-                  }"
-                >
-                  {{ possibleWorker.firstName }}
-                </option>
-              </select>
+              </ng-multiselect-dropdown>
               <div
                 *ngIf="taskForm.get('workerIds')?.['touched'] && taskForm.get('workerIds')?.['invalid']"
                 class="alert alert-danger"
@@ -71,20 +62,15 @@
             </div>
 
             <div class="col-md-6">
-              <select
-                class="form-select"
-                aria-label="currentWorkerId"
+              <ng-multiselect-dropdown
                 formControlName="currentWorkerId"
-                style="font-size :13px"
+                [placeholder]="'Select Current Worker'"
+                [settings]="subDropdownSettings"
+                [data]="currentWorkerList"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
               >
-                <option disabled>Select Current Workers</option>
-                <option
-                  *ngFor="let currentWorker of currentWorkerList"
-                  [value]="currentWorker.id"
-                >
-                  {{ currentWorker.firstName }}
-                </option>
-              </select>
+              </ng-multiselect-dropdown>
               <div
                 *ngIf="taskForm.get('currentWorkerId')?.['touched'] && taskForm.get('currentWorkerId')?.['invalid']"
                 class="alert alert-danger"
@@ -104,7 +90,7 @@
                 class="form-select"
                 aria-label="orderingScheme"
                 formControlName="orderingScheme"
-                style="font-size :12px"
+                style="font-size: 12px"
               >
                 <option disabled>Select Order Scheme</option>
                 <option value="0">0</option>
@@ -125,7 +111,9 @@
           </div>
 
           <div class="text-center my-2">
-            <button class="btn btn-primary fw-bold form-control">Add Task</button>
+            <button class="btn btn-primary fw-bold form-control">
+              Add Task
+            </button>
           </div>
           <span class="my-2"></span>
         </div>

@@ -42,7 +42,7 @@ export class AuthService {
       .subscribe((response) => {
         if (response) {
           this.toaster.success('New User is created');
-        console.log(response);
+          console.log(response);
         }
       });
   }
@@ -68,9 +68,7 @@ export class AuthService {
         if (response) {
           this.toaster.success('Access Granted');
           this.localStorage.setItem('userData', response.data);
-          setTimeout(() => {
-            this.router.navigate(['/taskDashboard']);
-          }, 2500);
+          this.router.navigate(['/taskDashboard']);
           this.userService.refreshUser();
         }
       });

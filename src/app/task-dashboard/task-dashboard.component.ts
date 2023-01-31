@@ -41,6 +41,7 @@ export class TaskDashboardComponent implements OnInit {
 
   onCloseClickEvent(): void {
     this.displayStyle = 'none';
+    this.selectedTask = '';
   }
 
   deleteTask(task: any): void {
@@ -51,5 +52,13 @@ export class TaskDashboardComponent implements OnInit {
   }
   onEvent(event: Event) {
     event.stopPropagation();
+  }
+
+  completeTask(task:any):void{
+    console.log(task);
+    this.taskService.completeTask(task);
+  }
+  insideSkip():void{
+    console.log("On click of skip Button");
   }
 }

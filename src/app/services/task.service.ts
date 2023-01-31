@@ -50,11 +50,9 @@ export class TaskService {
       )
       .subscribe((response) => {
         if (response) {
-          console.log(response);
+          console.log("ADD Task Response : ",response);
           this.toastr.success('New Task is added');
-          setTimeout(() => {
-            this.router.navigate(['/taskDashboard']);
-          }, 2500);
+          this.router.navigate(['/taskDashboard']);
         }
       });
   }
@@ -88,11 +86,16 @@ export class TaskService {
         if(response == null){
           console.log(response)
           this.toastr.success(task.name +' task is removed');
-          setTimeout(() => {
           location.reload();
-          }, 2000);
         }
         
       });
+  }
+
+  completeTask(task:any):void{
+    console.log("From Inside Service",task);
+    let endPoint = '/' + task.id + '/Done';
+    this.httpClient.post('https://localhost:5001/Task'+endPoint,task).subscribe((response)=>console.log("After Put Request",response));
+    location.reload();
   }
 }
