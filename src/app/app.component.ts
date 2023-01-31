@@ -14,7 +14,8 @@ export class AppComponent implements OnInit{
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService
-  ) {}
+   ) {}
+
   ngOnInit(): void {
     console.log("Component Initialised");
     this.userService.user$.subscribe(data =>{
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit{
       this.user = data;
     });
   }
+  
   logout(): void {
     this.authService.logout();
   }

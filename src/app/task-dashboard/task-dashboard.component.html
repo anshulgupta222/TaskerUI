@@ -1,10 +1,10 @@
-<div class="row justify-content-center" style="font-size: 11px">
-  <div class="col-md-5 border">
+<div class="row justify-content-center">
+  <div class="col-md-5">
     <div class="container">
       <div class="table-wrapper my-2">
         <div class="table-title">
           <div class="row">
-            <div class="col-sm-8 fw-bold my-2" style="font-size: 14px">
+            <div class="col-sm-8 fw-bold my-2" style="font-size: 18px">
               Task Details
             </div>
             <div class="col-sm-4">
@@ -12,42 +12,67 @@
                 type="button"
                 class="btn btn-primary"
                 (click)="showAddTask()"
-                style="font-size: 11px; float: right"
+                style="font-size: 12px; float: right"
               >
+                <i class="bi bi-plus"></i>
                 Add New Task
               </button>
             </div>
           </div>
         </div>
+        <table
+          class="table table-bordered table-hover"
+          *ngIf="tasks"
+          style="text-align: center; font-size: 12px"
+        >
+          <thead>
+            <tr class="table-primary">
+              <th>Task</th>
+              <th>Current Worker</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let task of tasks"
+              (click)="rowSelected(task)"
+              [ngClass]="{ highlight: task === selectedTask }"
+            >
+              <td class="align-middle">
+                {{ task.name }}
+              </td>
+              <td class="align-middle">
+                {{ task.currentWorker.firstName }}
+                {{ task.currentWorker.lastName }}
+              </td>
+              <td>
+                <button
+                  class="btn bi bi-check-square-fill"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Complete Task"
+                  (click)="completeTask(task); onEvent($event)"
+                ></button>
+                <button
+                  class="btn bi bi-arrow-right-square-fill"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Skip Task"
+                  (click)="insideSkip(); onEvent($event)"
+                ></button>
+                <button
+                  class="btn bi bi-trash-fill"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Delete Task"
+                  (click)="deleteTask(task); onEvent($event)"
+                ></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <table class="table table-bordered table-hover" *ngIf="tasks">
-      <thead>
-        <tr class="table-primary">
-          <th>Task</th>
-          <th>Current Worker</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let task of tasks"
-          (click)="rowSelected(task)"
-          [ngClass]="{ highlight: task === selectedTask }"
-        >
-          <td>{{ task.name }}</td>
-          <td>
-            {{ task.currentWorker.firstName }} {{ task.currentWorker.lastName }}
-          </td>
-          <td>
-            <button
-              class="btn-close d-flex justify-content-center"
-              (click)="deleteTask(task); onEvent($event)"
-            ></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
 <task-details

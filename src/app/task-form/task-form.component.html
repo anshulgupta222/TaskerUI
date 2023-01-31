@@ -1,6 +1,6 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="font-size: 16px">
   <div class="col-md-4 border">
-    <div class="text-start fw-bold my-2">Create a Task</div>
+    <div class="text-start fw-bold my-2">Create a New Task</div>
     <div class="col-md-12"><hr /></div>
     <div class="form-group my-2">
       <form [formGroup]="taskForm" (ngSubmit)="addTask()">
@@ -20,6 +20,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Task Name"
+                style="font-size: 13px"
               />
               <div
                 *ngIf="taskForm.get('name')?.['touched'] && taskForm.get('name')?.['invalid']"
@@ -34,19 +35,19 @@
               </div>
             </div>
           </div>
-          <div class="row my-2">
-            <div class="col-md-6">
-              <select
-                class="form-select"
-                aria-label="workerIds"
+          <div class="row my-2" style="font-size: 13px">
+            <div class="col-md-6" *ngIf="possibleWorkerList">
+              <ng-multiselect-dropdown
                 formControlName="workerIds"
-                multiple
-
+                [placeholder]="'Select Possible Workers'"
+                [settings]="dropdownSettings"
+                [data]="possibleWorkerList"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)"
               >
-                <option disabled>Select Possible Workers</option> -->
-                <option *ngFor="let user of usersList" [value]="user.id">
-                  {{user.firstName}}</option>
-              </select>
+              </ng-multiselect-dropdown>
               <div
                 *ngIf="taskForm.get('workerIds')?.['touched'] && taskForm.get('workerIds')?.['invalid']"
                 class="alert alert-danger"
@@ -55,21 +56,21 @@
                   *ngIf="taskForm.get('workerIds')?.errors?.['required']"
                   style="font-size: 10px"
                 >
-                  Please Select the Workers
+                  Please Select the Possible Workers
                 </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <select
-                class="form-select"
-                aria-label="currentWorkerId"
+              <ng-multiselect-dropdown
                 formControlName="currentWorkerId"
+                [placeholder]="'Select Current Worker'"
+                [settings]="subDropdownSettings"
+                [data]="currentWorkerList"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
               >
-                <option disabled>Select Current Workers</option>
-                <option *ngFor="let user of usersList" [value]="user.id">
-                  {{user.firstName}}</option>
-              </select>
+              </ng-multiselect-dropdown>
               <div
                 *ngIf="taskForm.get('currentWorkerId')?.['touched'] && taskForm.get('currentWorkerId')?.['invalid']"
                 class="alert alert-danger"
@@ -84,13 +85,14 @@
             </div>
           </div>
           <div class="row my-2">
-            <div class="col-md-12">
+            <div class="col-md-13">
               <select
                 class="form-select"
                 aria-label="orderingScheme"
                 formControlName="orderingScheme"
+                style="font-size: 12px"
               >
-                <option selected>Select Order Scheme</option>
+                <option disabled>Select Order Scheme</option>
                 <option value="0">0</option>
                 <option value="1">1</option>
               </select>
@@ -109,7 +111,9 @@
           </div>
 
           <div class="text-center my-2">
-            <button class="btn btn-primary">Add Task</button>
+            <button class="btn btn-primary fw-bold form-control">
+              Add Task
+            </button>
           </div>
           <span class="my-2"></span>
         </div>

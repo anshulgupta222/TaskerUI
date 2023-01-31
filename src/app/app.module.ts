@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -13,7 +14,6 @@ import { HeaderInterceptor } from './interceptor/header.interceptor';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskDashboardComponent } from './task-dashboard/task-dashboard.component';
-
 
 
 @NgModule({
@@ -32,11 +32,15 @@ import { TaskDashboardComponent } from './task-dashboard/task-dashboard.componen
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({positionClass: 'toast-top-center'})
+    ToastrModule.forRoot({ positionClass: 'toast-top-center', timeOut: 1500 }),
+    NgMultiSelectDropDownModule.forRoot(),
   ],
-  providers: [{provide: HTTP_INTERCEPTORS,
-    useClass: HeaderInterceptor,
-    multi: true}],
-  bootstrap: [AppComponent]
+  
+  schemas:[NO_ERRORS_SCHEMA], 
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
