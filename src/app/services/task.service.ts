@@ -61,6 +61,11 @@ export class TaskService {
     return this.httpClient.get<TaskDetail[]>('https://localhost:5001/Task');
   }
 
+  getTaskDetailsById(taskId :any):Observable<TaskDetail>{
+    let endPoint = '/' + taskId;
+    return this.httpClient.get<TaskDetail>('https://localhost:5001/Task'+endPoint)
+  }
+
   deleteTask(task: { name: string; id: number }): void {
     console.log(' Calling Delete Task API', task.id, task.name);
     let endPoint = '/' + task.id;
@@ -93,9 +98,16 @@ export class TaskService {
   }
 
   completeTask(task:any):void{
-    console.log("From Inside Service",task);
+    console.log("From Inside Complete Service",task);
     let endPoint = '/' + task.id + '/Done';
-    this.httpClient.post('https://localhost:5001/Task'+endPoint,task).subscribe((response)=>console.log("After Put Request",response));
+    this.httpClient.post('https://localhost:5001/Task'+endPoint,task).subscribe((response)=>console.log("After Complete Request",response));
+    location.reload();
+  }
+
+  skipTask(task:any):void{
+    console.log("From Inside Skip Service",task);
+    let endPoint = '/' + task.id + '/Skip';
+    this.httpClient.post('https://localhost:5001/Task'+endPoint,task).subscribe((response)=>console.log("After Skip Request",response));
     location.reload();
   }
 }
