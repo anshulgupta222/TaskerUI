@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output} from '@angular/core';
-import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'task-details',
@@ -7,8 +6,6 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent {
-
-  constructor(private readonly taskService : TaskService){}
   
   @Input() selectedTask: any;
   @Input() displayStyle: any;
@@ -19,6 +16,5 @@ export class TaskDetailsComponent {
     this.displayStyle= 'none';
     console.log('Child Component', this.displayStyle);
   }
-
 
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUser } from '../interfaces/user.interface';
-import { LocalStorageService } from '../services/localStorage';
 
 import { TaskService } from '../services/task.service';
 
@@ -15,13 +13,11 @@ export class TaskDashboardComponent implements OnInit {
   selectedTask: any;
   displayStyle: any = 'none';
   tasks: any[] | undefined = [];
-  userData:any;
 
 
   constructor(
     private router: Router,
-    private readonly taskService : TaskService,
-    private readonly localStorage : LocalStorageService
+    private readonly taskService : TaskService
   ) {}
 
   ngOnInit(): void {
@@ -30,21 +26,22 @@ export class TaskDashboardComponent implements OnInit {
       this.tasks = response;
       console.log('API RESPONSE OF TASK DETAILS LIST : ', this.tasks);
     });
-
-       
+    
   }
 
   showAddTask(): void {
     this.router.navigate(['/addTask']);
-
   }
 
   rowSelected(task: any) {
-    this.taskService.getTaskDetailsById(task.id).subscribe((response)=>{
-    this.selectedTask=response;
-    console.log("After New Changes Selected Row",this.selectedTask);
-    })
+    this.selectedTask = task;
     this.displayStyle = 'block';
+    console.log('Selected Task is : ', this.selectedTask);
+  }
+
+  onCloseClickEvent(): void {
+    this.displayStyle = 'none';
+    this.selectedTask = '';
   }
 
   deleteTask(task: any): void {
@@ -53,31 +50,15 @@ export class TaskDashboardComponent implements OnInit {
     this.taskService.deleteTask(task);
 
   }
-
-  completeTask(task:any):void{
-    console.log("Inside Skip Task",task);
-    this.taskService.completeTask(task);
-  }
-
-  skipTask(task: any):void{
-    console.log("Inside Skip Task",task);
-    this.taskService.skipTask(task);
-  }
   onEvent(event: Event) {
     event.stopPropagation();
   }
 
-  onCloseClickEvent(): void {
-    this.displayStyle = 'none';
-    this.selectedTask = '';
+  completeTask(task:any):void{
+    console.log(task);
+    this.taskService.completeTask(task);
   }
-  buttonShowHide(userName:any):boolean{
-    this.userData = this.localStorage.getItem<IUser>('userData');
-    if(userName === this.userData.firstName)
-    {
-      return true;
-    }
-    return false;
+  insideSkip():void{
+    console.log("On click of skip Button");
   }
-
 }
