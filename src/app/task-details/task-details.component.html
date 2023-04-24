@@ -13,11 +13,30 @@
           (click)="closePopup()"
         ></button>
       </div>
-      <div class="modal-body" *ngIf="selectedTask" style="font-size: 11px">
+      <div class="modal-body" *ngIf="selectedTask" style="font-size: 12px">
         <p>Task Name : {{ selectedTask.name }}</p>
-        <p>Created On : {{selectedTask.createdOn}}</p>
-        <p>Current Worker : {{ selectedTask.currentWorker.firstName }} {{ selectedTask.currentWorker.lastName }} </p>
-        <!-- <p>History :{{}}</p> -->
+        <p>Created On : {{ selectedTask.createdOn | date: 'dd/MM/yyyy'}}</p>
+        <p>
+          Current Worker : {{ selectedTask.currentWorker.firstName }}
+          {{ selectedTask.currentWorker.lastName }}
+        </p>
+        <p>History :</p>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>WorkerId</th>
+              <th>Work Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of selectedTask.history">
+              <td>{{ h.timeStamp | date: 'dd/MM/yyyy'}}</td>
+              <td>{{ h.workerId }}</td>
+              <td>{{ h.status }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
