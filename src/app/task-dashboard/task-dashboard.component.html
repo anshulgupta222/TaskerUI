@@ -47,7 +47,6 @@
               </td>
               <td>
                 <button
-                  *ngIf="buttonShowHide(task.currentWorker.firstName)"
                   class="btn bi bi-check-square-fill"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -55,12 +54,11 @@
                   (click)="completeTask(task); onEvent($event)"
                 ></button>
                 <button
-                  *ngIf="buttonShowHide(task.currentWorker.firstName)"
                   class="btn bi bi-arrow-right-square-fill"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Skip Task"
-                  (click)="skipTask(task); onEvent($event)"
+                  (click)="insideSkip(); onEvent($event)"
                 ></button>
                 <button
                   class="btn bi bi-trash-fill"
